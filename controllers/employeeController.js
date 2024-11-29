@@ -1,4 +1,5 @@
-const Employee = require('../models/employees'); // giving route to the employees file which is in models 
+const Employee = require('../models/employees'); // giving route to the employees file which is in models
+const authenticate = require('../middleware /auth'); // Import authentication middleware
 
 // This function will fetch all employees from the employees.js (Database) and will return them in response
 exports.getEmployees = async (req, res) => {
@@ -9,7 +10,8 @@ exports.getEmployees = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-// same as like .getemployess but this function will help to find the employee with specific ID.
+
+// Same as like .getEmployees but this function will help to find the employee with specific ID.
 exports.getEmployeeById = async (req, res) => {
     const { eid } = req.params;
     try {
@@ -21,7 +23,7 @@ exports.getEmployeeById = async (req, res) => {
     }
 };
 
-//  Basically, this function will create a new Empolyee using the proper Schema for employees
+// Basically, this function will create a new Employee using the proper Schema for employees
 exports.createEmployee = async (req, res) => {
     const { first_name, last_name, email, position, salary, date_of_joining, department } = req.body;
 
@@ -42,7 +44,8 @@ exports.createEmployee = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-// This function will update an employee for that first it will fecth data from database and then later update the changes in employee's information
+
+// This function will update an employee, for that it will first fetch data from the database and then later update the changes in the employee's information
 exports.updateEmployee = async (req, res) => {
     const { eid } = req.params;
     const updates = req.body;
@@ -55,7 +58,8 @@ exports.updateEmployee = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-// this function will delete the employee with id which is provided in endpoint from the databse.
+
+// This function will delete the employee with ID which is provided in the endpoint from the database.
 exports.deleteEmployee = async (req, res) => {
     const { eid } = req.params;
 
